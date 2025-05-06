@@ -2,14 +2,16 @@
 #include <string>
 using namespace std;
 
+#include "Attendance.h"
 
 void menu();
 void takeAttend();
 void viewAttendance();
 
 
-int main() {
-    
+int main()
+{
+    Attendance test("data/course1/allStudents.txt");
     menu();
     return 0;
 }
