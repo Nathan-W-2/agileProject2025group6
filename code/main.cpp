@@ -1,8 +1,9 @@
 #include <iostream>
+#include "Attendance.h"
 using namespace std;
 
 int main()
 {
-    cout<<"Agile Project"<<endl;
+    Attendance test("data/course1/allStudents.txt");
     return 0;
 }

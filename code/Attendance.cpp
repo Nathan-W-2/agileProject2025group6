@@ -35,5 +35,11 @@ void Attendance::readFile(string filepath) {
         Student student; 
         student.firstName = element.at(0);
         student.lastName = element.at(1);
+        allStudents.push_back(student);
+    }
+
+    for (auto& student: allStudents) {
+        cout << student.firstName << endl; 
+        cout << student.lastName << endl; 
     }
 }

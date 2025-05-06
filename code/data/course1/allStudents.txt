@@ -1,5 +1,22 @@
-Student1 14 0 1 1
-Student2 ...
-Student3 ...
-Student4 ...
-Student5 ...
+Christopher Abney	
+Ronald Brock	
+Brandon Carls	
+Mitchell Clark	
+Ian Flaskamp	
+Joseph Fudali	
+Adrian Grady	
+Megan Jensen	
+Sarah Kersten	
+Robert Kloss
+Matt Michel	
+A'Shun Motley
+Dustin Parks	
+Arthur Pisanko	
+Daniel Plutchak	
+Isaac Silverson	
+Kyle Stuersel	
+Ezra Tetrick	
+Alejandro Toledo	
+Nathan Williams	
+Ethan Wojciechowski	
+Tyler Wojdyla	
