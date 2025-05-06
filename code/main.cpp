@@ -4,9 +4,8 @@ using namespace std;
 
 
 void menu();
-void takeAttend();
+void takeAttendance();
 void viewAttendance();
-
 
 int main() {
     
@@ -31,14 +30,17 @@ void menu() {
         if(selectionNum == 1) {
             cout << endl;
             cout << "========================" << endl;
-            takeAttend();
+            takeAttendance();
+        }  
+        if (selectionNum == 2) {
+            cout << endl;
+            cout << "========================" << endl;
+            viewAttendance();
         }
-        
-        
     }
 }
 
-void takeAttend() {
+void takeAttendance() {
     int selectionNum = 0;
     
     while (selectionNum != 5)
