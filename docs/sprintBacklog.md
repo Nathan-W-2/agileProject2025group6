@@ -33,6 +33,6 @@
 | Task ID | Task Description | User Story ID | Assigned To | Status | Dependencies |
 |---------|------------------|---------------|-------------|--------|--------------|
 | T-1 | Create initial shell for menu prompt | US-2 | Alejandro | In Progress | None |
-| T-2 | Add functionality to intial prompt | US-2 | Tyler | To Do | None |
+| T-2 | Add functionality to intial prompt (view and take attendance) | US-2 | Tyler, Alejandro | To Do | None |
 
 
