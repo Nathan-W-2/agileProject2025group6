@@ -32,14 +32,24 @@ void Attendance::readFile(string filepath) {
     }
 
     for (const vector<string>& element: parsedInput) {
-        Student student; 
-        student.firstName = element.at(0);
-        student.lastName = element.at(1);
-        allStudents.push_back(student);
+        Student* studentPtr = new Student;
+        // cout << element.at(0) << element.at(1) << endl; 
+        studentPtr->firstName = element.at(0);
+        studentPtr->lastName = element.at(1);
+        allStudents.push_back(studentPtr);
     }
 
-    for (auto& student: allStudents) {
-        cout << student.firstName << endl; 
-        cout << student.lastName << endl; 
+    for (Student*& student: allStudents) {
+        changeAttendance(student);
+        cout << student->attendance << endl;
     }
+}
+
+void Attendance::changeAttendance(Student* student) {
+    string attendanceNum;
+    cout << student->firstName << " " << student->lastName << endl; 
+    cout << "Enter in attendance (0 = Present, 1 = Excused Absent, 2 = Unexcused Absent, 3 = Late): "; 
+    cin >> attendanceNum; 
+    student->attendance = stoi(attendanceNum);
+
 }
