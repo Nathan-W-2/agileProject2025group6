@@ -10,9 +10,9 @@ void viewAttendance();
 
 int main()
 {
-    Attendance test("data/course1/allStudents.txt");
-    test.printStudents();
-    test.writeFile();
+   // Attendance test("data/course1/allStudents.txt");
+    //test.printStudents();
+    //test.writeFile();
     menu();
     return 0;
 }
@@ -59,13 +59,13 @@ void takeAttendance() {
        
         
         if(selectionNum == 1) {
-            Attendance course1("/data/course1/allStudents.txt");
-            cout << "You have chosen class 1" << endl;
+            Attendance course1("data/course1/allStudents.txt");
 
-            //print out class roster
+            course1.printStudents();
             while (selectionNum != -1) {
                 cout << "Enter Student index to update attendance: (-1 to quit) ";
                 cin >> selectionNum;
+                cout << "Selection num is: " << selectionNum << endl;
 
                 if (selectionNum != -1) {
                     course1.changeAttendance(course1.getStudentAt(selectionNum));
@@ -73,24 +73,23 @@ void takeAttendance() {
             }
         }
         else if(selectionNum == 2) {
-            Attendance course2("/data/course2/allStudents.txt");
-            cout << "You have chosen class 2" << endl;
+            Attendance course2("data/course2/allStudents.txt");
 
-            //print out class roster
+            course2.printStudents();
             while (selectionNum != -1) {
                 cout << "Enter Student index to update attendance: (-1 to quit) ";
                 cin >> selectionNum;
-                
+                cout << "Selection num is: " << selectionNum << endl;
+
                 if (selectionNum != -1) {
                     course2.changeAttendance(course2.getStudentAt(selectionNum));
                 }
             }
         }
         else if(selectionNum == 3) {
-            Attendance course3("/data/course3/allStudents.txt");
-            cout << "You have chosen class 3" << endl;
+            Attendance course3("data/course3/allStudents.txt");
 
-            //print out class roster
+            course3.printStudents();
             while (selectionNum != -1) {
                 cout << "Enter Student index to update attendance: (-1 to quit) ";
                 cin >> selectionNum;
