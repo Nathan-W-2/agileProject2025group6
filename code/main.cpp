@@ -2,8 +2,6 @@
 #include <string>
 using namespace std;
 
-#include "Attendance.h"
-
 void menu();
 void takeAttendance();
 void viewAttendance();
@@ -11,7 +9,6 @@ void viewAttendance();
 
 int main()
 {
-    Attendance test("data/course1/allStudents.txt");
     menu();
     return 0;
 }
