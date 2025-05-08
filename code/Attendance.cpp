@@ -10,6 +10,16 @@ Attendance::Attendance(string filepath){
     readFile(filepath);
 }
 
+Attendance::~Attendance(){
+    for (Student*& student: allStudents) {
+        delete student; 
+    }
+}
+
+// vector<Student*> Attendance::getAllStudents() const {
+//     return allStudents; 
+// }
+
 void Attendance::readFile(string filepath) {
     vector<vector<string>> parsedInput;
 
@@ -56,10 +66,8 @@ void Attendance::writeFile()
 
 }
 
-
 void Attendance::changeAttendance(Student* student) {
     string attendanceNum;
-    // cout << student->firstName << " " << student->lastName << endl; 
     cout << "Enter in attendance (0 = Present, 1 = Excused Absent, 2 = Unexcused Absent, 3 = Late): "; 
     cin >> attendanceNum; 
     student->attendance = stoi(attendanceNum);

@@ -7,7 +7,6 @@ void menu();
 void takeAttendance();
 void viewAttendance();
 
-
 int main()
 {
     Attendance test("data/course1/allStudents.txt");

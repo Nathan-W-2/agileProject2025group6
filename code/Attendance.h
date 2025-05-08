@@ -12,6 +12,9 @@ class Attendance
     };
 public:
     Attendance(string filepath);
+    ~Attendance();
+
+    vector<Student*> getAllStudents() const; 
     
     void readFile(string filepath);
     void writeFile();
