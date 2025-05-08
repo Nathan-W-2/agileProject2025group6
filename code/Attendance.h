@@ -16,6 +16,7 @@ class Attendance
     ~Attendance();
 
     Student* getStudentAt(int index) const; 
+    int getNumStudents();
     
     void printStudents(); 
     void readFile(string filepath);

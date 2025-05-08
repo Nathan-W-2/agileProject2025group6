@@ -22,6 +22,10 @@ Student* Attendance::getStudentAt(int index) const
     return allStudents.at(index);
 }
 
+int Attendance::getNumStudents() {
+    return allStudents.size();
+}
+
 void Attendance::readFile(string filepath) {
     vector<vector<string>> parsedInput;
 
