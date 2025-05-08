@@ -90,8 +90,13 @@ void Attendance::printStudents() {
 }
 
 void Attendance::changeAttendance(Student* student) {
-    string attendanceNum;
+    string attendanceInput;
     cout << "Enter in attendance (0 = Present, 1 = Excused Absent, 2 = Unexcused Absent, 3 = Late): "; 
-    cin >> attendanceNum; 
-    student->attendance = stoi(attendanceNum);
+    cin >> attendanceInput; 
+    int attendanceNum = stoi(attendanceInput);
+    if (attendanceNum < 0 or attendanceNum > 3) {
+        student->attendance = 0; 
+    } else {
+        student->attendance = attendanceNum;
+    }
 }
