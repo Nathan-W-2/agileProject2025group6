@@ -18,7 +18,7 @@ Attendance::~Attendance(){
 
 Student* Attendance::getStudentAt(int index) const
 {
-    allStudents.at(index);
+    return allStudents.at(index);
 }
 
 void Attendance::readFile(string filepath) {
