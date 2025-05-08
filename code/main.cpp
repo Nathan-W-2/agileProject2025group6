@@ -58,13 +58,23 @@ void takeAttendance() {
        
         
         if(selectionNum == 1) {
+            Attendance course1("/data/course1/allStudents.txt");
             cout << "You have chosen class 1" << endl;
+
+            //print out class roster
+
         }
         else if(selectionNum == 2) {
+            Attendance course2("/data/course2/allStudents.txt");
             cout << "You have chosen class 2" << endl;
+
+            //print out class roster
         }
         else if(selectionNum == 3) {
+            Attendance course3("/data/course3/allStudents.txt");
             cout << "You have chosen class 3" << endl;
+
+            //print out class roster
         }
         
         cout << endl;
