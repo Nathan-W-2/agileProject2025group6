@@ -7,6 +7,7 @@ void menu();
 void takeAttendance();
 void viewAttendance();
 
+
 int main()
 {
     Attendance test("data/course1/allStudents.txt");
@@ -62,19 +63,43 @@ void takeAttendance() {
             cout << "You have chosen class 1" << endl;
 
             //print out class roster
+            while (selectionNum != -1) {
+                cout << "Enter Student index to update attendance: (-1 to quit) ";
+                cin >> selectionNum;
 
+                if (selectionNum != -1) {
+                    course1.changeAttendance(course1.getStudentAt(selectionNum));
+                }
+            }
         }
         else if(selectionNum == 2) {
             Attendance course2("/data/course2/allStudents.txt");
             cout << "You have chosen class 2" << endl;
 
             //print out class roster
+            while (selectionNum != -1) {
+                cout << "Enter Student index to update attendance: (-1 to quit) ";
+                cin >> selectionNum;
+                
+                if (selectionNum != -1) {
+                    course2.changeAttendance(course2.getStudentAt(selectionNum));
+                }
+            }
         }
         else if(selectionNum == 3) {
             Attendance course3("/data/course3/allStudents.txt");
             cout << "You have chosen class 3" << endl;
 
             //print out class roster
+            while (selectionNum != -1) {
+                cout << "Enter Student index to update attendance: (-1 to quit) ";
+                cin >> selectionNum;
+                
+                if (selectionNum != -1) {
+                    course3.changeAttendance(course3.getStudentAt(selectionNum));
+                }
+                
+            }
         }
         
         cout << endl;
