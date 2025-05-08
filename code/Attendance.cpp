@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include <ctime>
 
 Attendance::Attendance(string filepath){
     readFile(filepath);
@@ -17,39 +18,49 @@ void Attendance::readFile(string filepath) {
         std::string line;
         //get each line one at a time
         while (std::getline(file, line)) {
-            std::stringstream ss(line);
-            std::string word;
-			vector<string> v;
-            //each word is added to a vector
-            while (ss >> word) {
-                v.push_back(word);
-            }
-			parsedInput.push_back(v);
+            Student* studentPtr = new Student;
+            studentPtr->name = line;
+            allStudents.push_back(studentPtr);
+            // std::stringstream ss(line);
+            // std::string word;
+			// vector<string> v;
+            // //each word is added to a vector
+            // while (ss >> word) {
+            //     v.push_back(word);
+            // }
+			// parsedInput.push_back(v);
         }
         file.close();
     } else {
         std::cerr << "Unable to open file" << std::endl;
     }
 
-    for (const vector<string>& element: parsedInput) {
-        Student* studentPtr = new Student;
-        // cout << element.at(0) << element.at(1) << endl; 
-        studentPtr->firstName = element.at(0);
-        studentPtr->lastName = element.at(1);
-        allStudents.push_back(studentPtr);
+    // for (const vector<string>& element: parsedInput) {
+    //     // Student* studentPtr = new Student;
+    //     // studentPtr->firstName = element.at(0);
+    //     // studentPtr->lastName = element.at(1);
+    //     // allStudents.push_back(studentPtr);
+    // }
+
+    // for (Student*& student: allStudents) {
+    //     cout << student->name << endl;
+    // }
+}
+
+void Attendance::writeFile()
+{
+    ofstream outputFile("foo.txt");
+    for (Student*& student: allStudents) {
+        outputFile << student->name << " " << student->attendance << endl; 
     }
 
-    for (Student*& student: allStudents) {
-        changeAttendance(student);
-        cout << student->attendance << endl;
-    }
 }
+
 
 void Attendance::changeAttendance(Student* student) {
     string attendanceNum;
-    cout << student->firstName << " " << student->lastName << endl; 
+    // cout << student->firstName << " " << student->lastName << endl; 
     cout << "Enter in attendance (0 = Present, 1 = Excused Absent, 2 = Unexcused Absent, 3 = Late): "; 
     cin >> attendanceNum; 
     student->attendance = stoi(attendanceNum);
-
 }
