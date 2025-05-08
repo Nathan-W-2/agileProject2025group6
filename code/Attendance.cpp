@@ -16,9 +16,10 @@ Attendance::~Attendance(){
     }
 }
 
-// vector<Student*> Attendance::getAllStudents() const {
-//     return allStudents; 
-// }
+Student* Attendance::getStudentAt(int index) const
+{
+    allStudents.at(index);
+}
 
 void Attendance::readFile(string filepath) {
     vector<vector<string>> parsedInput;
@@ -63,7 +64,29 @@ void Attendance::writeFile()
     for (Student*& student: allStudents) {
         outputFile << student->name << " " << student->attendance << endl; 
     }
+}
 
+void Attendance::printStudents() {
+    
+    for (int i = 0; i < allStudents.size(); i++) {
+        cout << i+1 << ") " << allStudents.at(i)->name << " - ";
+        if (allStudents.at(i)->attendance == 0) {
+            cout << "Present"; 
+        } 
+        else if (allStudents.at(i)->attendance == 1) {
+            cout << "Absent (Excused)"; 
+        } 
+        else if (allStudents.at(i)->attendance == 2) {
+            cout << "Absent (Unexcused)";
+        }
+        else if (allStudents.at(i)->attendance == 3) {
+            cout << "Late";
+        }
+        else {
+            cout << "Error";
+        }
+        cout << endl; 
+    }
 }
 
 void Attendance::changeAttendance(Student* student) {

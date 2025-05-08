@@ -10,6 +10,7 @@ void viewAttendance();
 int main()
 {
     Attendance test("data/course1/allStudents.txt");
+    test.printStudents();
     test.writeFile();
     menu();
     return 0;
