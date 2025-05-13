@@ -4,16 +4,24 @@
 
 using namespace std;
 
+struct Student{
+    string name;
+    int attendance = 0; 
+};
+
 class Attendance
 {
-    struct Student{
-        string firstName;
-        string lastName;
-    };
-public:
+    public:
     Attendance(string filepath);
+    ~Attendance();
+
+    Student* getStudentAt(int index) const; 
+    int getNumStudents();
     
+    void printStudents(); 
     void readFile(string filepath);
+    void writeFile();
+    void changeAttendance(Student* student);
 private:
-    vector<Student> allStudents;
+    vector<Student*> allStudents;
 };

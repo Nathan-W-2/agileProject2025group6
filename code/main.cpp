@@ -1,12 +1,10 @@
 #include <iostream>
 #include <string>
-
 #include "Attendance.h"
-
 using namespace std;
 
 void menu();
-void takeAttend();
+void takeAttendance();
 void viewAttendance();
 
 
@@ -33,12 +31,17 @@ void menu() {
         if(selectionNum == 1) {
             cout << endl;
             cout << "========================" << endl;
-            takeAttend();
+            takeAttendance();
+        }  
+        if (selectionNum == 2) {
+            cout << endl;
+            cout << "========================" << endl;
+            viewAttendance();
         }
     }
 }
 
-void takeAttend() {
+void takeAttendance() {
     int selectionNum = 0;
     
     while (selectionNum != 5)
@@ -53,20 +56,52 @@ void takeAttend() {
        
         
         if(selectionNum == 1) {
-            cout << "You have chosen class 1" << endl;
+            Attendance course1("data/course1/allStudents.txt");
+
+            course1.printStudents();
+            while (selectionNum != -1) {
+                cout << "Enter Student index to update attendance: (-1 to quit) ";
+                cin >> selectionNum;
+                cout << "Selection num is: " << selectionNum << endl;
+
+                if (selectionNum != -1) {
+                    course1.changeAttendance(course1.getStudentAt(selectionNum));
+                }
+            }
         }
         else if(selectionNum == 2) {
-            cout << "You have chosen class 2" << endl;
+            Attendance course2("data/course2/allStudents.txt");
+
+            course2.printStudents();
+            while (selectionNum != -1) {
+                cout << "Enter Student index to update attendance: (-1 to quit) ";
+                cin >> selectionNum;
+                cout << "Selection num is: " << selectionNum << endl;
+
+                if (selectionNum != -1) {
+                    course2.changeAttendance(course2.getStudentAt(selectionNum));
+                }
+            }
         }
         else if(selectionNum == 3) {
-            cout << "You have chosen class 3" << endl;
+            Attendance course3("data/course3/allStudents.txt");
+
+            course3.printStudents();
+            while (selectionNum != -1) {
+                cout << "Enter Student index to update attendance: (-1 to quit) ";
+                cin >> selectionNum;
+                
+                if (selectionNum != -1) {
+                    course3.changeAttendance(course3.getStudentAt(selectionNum));
+                }
+                
+            }
         }
         
         cout << endl;
         cout << "========================" << endl;
     }
 }
-
 
 void viewAttendance() {
     int selectionNum = 0;

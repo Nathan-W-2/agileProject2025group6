@@ -4,9 +4,27 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include <ctime>
 
 Attendance::Attendance(string filepath){
     readFile(filepath);
+}
+
+Attendance::~Attendance(){
+    for (Student*& student: allStudents) {
+        delete student; 
+    }
+}
+
+Student* Attendance::getStudentAt(int index) const
+{  
+    if (index < 0 or index >= allStudents.size()) {
+        cout << "Index out of bounds" << endl; 
+        return 0; 
+    } else {
+        cout << "Length of allStudents: " << allStudents.size() << endl;
+    return allStudents.at(index);
+    }
 }
 
 void Attendance::readFile(string filepath) {
@@ -17,29 +35,78 @@ void Attendance::readFile(string filepath) {
         std::string line;
         //get each line one at a time
         while (std::getline(file, line)) {
-            std::stringstream ss(line);
-            std::string word;
-			vector<string> v;
-            //each word is added to a vector
-            while (ss >> word) {
-                v.push_back(word);
-            }
-			parsedInput.push_back(v);
+            Student* studentPtr = new Student;
+            studentPtr->name = line;
+            allStudents.push_back(studentPtr);
+            // std::stringstream ss(line);
+            // std::string word;
+			// vector<string> v;
+            // //each word is added to a vector
+            // while (ss >> word) {
+            //     v.push_back(word);
+            // }
+			// parsedInput.push_back(v);
         }
         file.close();
     } else {
         std::cerr << "Unable to open file" << std::endl;
     }
 
-    for (const vector<string>& element: parsedInput) {
-        Student student; 
-        student.firstName = element.at(0);
-        student.lastName = element.at(1);
-        allStudents.push_back(student);
-    }
+    // for (const vector<string>& element: parsedInput) {
+    //     // Student* studentPtr = new Student;
+    //     // studentPtr->firstName = element.at(0);
+    //     // studentPtr->lastName = element.at(1);
+    //     // allStudents.push_back(studentPtr);
+    // }
 
-    for (auto& student: allStudents) {
-        cout << student.firstName << endl; 
-        cout << student.lastName << endl; 
+    // for (Student*& student: allStudents) {
+    //     cout << student->name << endl;
+    // }
+}
+
+void Attendance::writeFile()
+{
+    ofstream outputFile("foo.txt");
+    for (Student*& student: allStudents) {
+        outputFile << student->name << " " << student->attendance << endl; 
     }
+}
+
+void Attendance::printStudents() {
+    
+    for (int i = 0; i < allStudents.size(); i++) {
+        cout << i+1 << ") " << allStudents.at(i)->name << " - ";
+        if (allStudents.at(i)->attendance == 0) {
+            cout << "Present"; 
+        } 
+        else if (allStudents.at(i)->attendance == 1) {
+            cout << "Absent (Excused)"; 
+        } 
+        else if (allStudents.at(i)->attendance == 2) {
+            cout << "Absent (Unexcused)";
+        }
+        else if (allStudents.at(i)->attendance == 3) {
+            cout << "Late";
+        }
+        else {
+            cout << "Error";
+        }
+        cout << endl; 
+    }
+}
+
+void Attendance::changeAttendance(Student* student) {
+    string attendanceInput;
+    cout << "Enter in attendance (0 = Present, 1 = Excused Absent, 2 = Unexcused Absent, 3 = Late): "; 
+    cin >> attendanceInput; 
+    int attendanceNum = stoi(attendanceInput);
+    if (attendanceNum < 0 or attendanceNum > 3) {
+        student->attendance = 0; 
+    } else {
+        student->attendance = attendanceNum;
+    }
+}
+
+int Attendance::getNumStudents() {
+    return allStudents.size();
 }
