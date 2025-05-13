@@ -27,6 +27,7 @@
 | User Story ID | User Story Name | Assigned To |
 |---------------|-----------------|-------------|
 | US-2          | Starting Menu   | Tyler, Alejandro |
+| US-3          | Sorting         | Isaac Silverson  |
 
 ### Format: 
 | Task ID | Task Description | User Story ID | Assigned To | Status | Dependencies |
