@@ -6,7 +6,10 @@ using namespace std;
 void menu();
 void takeAttendance();
 void viewAttendance();
+void printDivider();
 
+void selectDate(string course);
+void selectRoster(string c);
 
 int main() {
     Attendance test("data/course1/allStudents.txt");
@@ -115,6 +118,36 @@ void takeAttendance() {
     }
 }
 
+// View Attendance functions
+
+void selectRoster(string c) {
+    
+    string numSelect;
+    
+    cout << c << endl;
+    cout << endl;
+    
+    while(numSelect != "quit")
+    {
+        cout << "Select Roster" << endl;
+        cout << "1) Alphabetical" << endl;
+        cout << "2) Seat Order" << endl;
+        cout << endl;
+        
+        cout << "Enter Number Here: " << endl;
+        cin >> numSelect;
+        
+        if (numSelect == "1") {
+            cout << "You have chosen `Alphabetical`" << endl;
+        } else if (numSelect == "2") {
+            cout << "You have chosen `Seat Order`" << endl;
+        }
+    }
+    
+    printDivider();
+}
+
+
 void viewAttendance() {
     int selectionNum = 0;
 
@@ -129,31 +162,31 @@ void viewAttendance() {
         cout << "Enter option here: ";
         cin >> selectionNum;
         cout << endl;
-
-        string date = "";
-
-        //prompt user to chose which class they would like to view
-        cout << "========================" << endl;
-        cout << "Which date would you like to chose? (MM/DD/YYYY)" << endl;
-        cout << "Enter date here: ";
-        cin >> date;
-        cout << endl;
-
-        //prompt user to chose how they would like the attendance to be displayed
-        cout << "========================" << endl;
-    
-
-        //find specific class on that given date
-        if (selectionNum == 1) {
-
-        }
-        else if (selectionNum == 2) {
-           
-        }
-        else if (selectionNum == 3) {
-           
-        }
-
-
+        
+        selectDate("course1");
     }
+}
+
+void selectDate(string course) {
+    string date = "";
+
+    //prompt user to chose which class they would like to view
+    cout << "========================" << endl;
+    cout << "Which date would you like to chose? (MM/DD/YYYY)" << endl;
+    cout << "Enter date here: ";
+    cin >> date;
+    cout << endl;
+    
+    string filePath = "/data/" + course + "/attendanceSheets/" + date + ".txt";
+    cout << filePath << endl;
+    Attendance course2(filePath);
+    course2.printStudents();
+
+    //prompt user to chose how they would like the attendance to be displayed
+    cout << "========================" << endl;
+}
+
+void printDivider() {
+    cout << endl;
+    cout << "========================" << endl;
 }
