@@ -18,5 +18,5 @@ Kyle Stuersel 0
 Ezra Tetrick 0
 Alejandro Toledo 0
 Nathan Williams 0
-Ethan Wojciechowski 0
-Tyler Wojdyla 3
+Ethan Wojciechowski 2
+Tyler Wojdyla 0

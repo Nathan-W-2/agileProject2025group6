@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string>
+#include <fstream>
+#include <vector>
 #include "Attendance.h"
 using namespace std;
 
@@ -7,12 +9,15 @@ void menu();
 void takeAttendance();
 void viewAttendance();
 void printDivider();
+void addClass();
+void appendToFile(string filePath, string newLine);
 
 void selectDate(string course);
 void selectRoster(string c);
 
 int main() {
     Attendance test("data/course1/allStudents.txt");
+    appendToFile("data/courseNames.txt", "Test");
     menu();
     return 0;
 }
@@ -26,6 +31,7 @@ void menu() {
         cout << "Press the key for corresponding action, or type out 3 to quit" << endl;
         cout << "1) Take Attendance" << endl;
         cout << "2) View Attendance" << endl;
+        cout << "3) Add a New Class" << endl;
         
         cout << endl;
         cout << "Enter number here: ";
@@ -162,6 +168,14 @@ void viewAttendance() {
     }
 }
 
+void addClass() {
+    string date = "";
+    cout << "Enter in course name: ";
+    cin >> date;
+    cout << endl;
+    
+}
+
 void selectDate(string course) {
     string date = "";
 
@@ -184,4 +198,25 @@ void selectDate(string course) {
 void printDivider() {
     cout << endl;
     cout << "========================" << endl;
+}
+
+void appendToFile(string filePath, string newLine){
+    vector<string> allLines; 
+    ifstream file(filePath);
+    if (file.is_open()) {
+        string line;
+        //get each line one at a time
+        while (std::getline(file, line)) {
+            allLines.push_back(line);
+        }
+        file.close();
+    } else {
+        cerr << "Unable to open file" << endl;
+    }
+    //add new line that will be added to the file
+    allLines.push_back(newLine); 
+    ofstream outputFile(filePath);
+    for (auto& line: allLines) {
+        outputFile << line << endl; 
+    }
 }
