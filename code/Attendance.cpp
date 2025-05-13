@@ -113,9 +113,10 @@ string Attendance::getDate() {
     char* dt = ctime(&currentTime);
     string str(dt);
     
-    //Tue May 13 13:12:23 2025
+    //Ex: Tue May 13 13:12:23 2025
     string newString = "";
 
+    //start after the day string ends
     int beginSpace = 3;
     int monthLen = 1;
     int spaceCounter = 0;
@@ -131,19 +132,23 @@ string Attendance::getDate() {
             }
         }
         else {
+            //increment the length until we reach the second space
             monthLen++;
         }
     }
 
     newString = str.substr(beginSpace + 1, monthLen);
 
+    //set beginSpace the end of the new String
     beginSpace = beginSpace + monthLen + 1;
     spaceCounter = 1;
     for (int i = beginSpace + 1; i < str.size(); i++) {
         if (str[i] == ' ') {
+            //when we reach the final space set begin space to where the final space is
             beginSpace += spaceCounter + 1;
             break;
         }
+        //increment until we reach the final space before the year string
         spaceCounter++;
     }
 
