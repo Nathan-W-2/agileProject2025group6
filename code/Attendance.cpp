@@ -106,3 +106,7 @@ void Attendance::changeAttendance(Student* student) {
         student->attendance = attendanceNum;
     }
 }
+
+int Attendance::getNumStudents() {
+    return allStudents.size();
+}
