@@ -64,6 +64,10 @@ void takeAttendance() {
                 cin >> selectionNum;
                 cout << "Selection num is: " << selectionNum << endl;
 
+                if (selectionNum == course1.getNumStudents()) {
+                    selectionNum -= 1;
+                }
+
                 if (selectionNum != -1) {
                     course1.changeAttendance(course1.getStudentAt(selectionNum));
                 }
@@ -78,6 +82,10 @@ void takeAttendance() {
                 cin >> selectionNum;
                 cout << "Selection num is: " << selectionNum << endl;
 
+                if (selectionNum == course2.getNumStudents()) {
+                    selectionNum -= 1;
+                }
+
                 if (selectionNum != -1) {
                     course2.changeAttendance(course2.getStudentAt(selectionNum));
                 }
@@ -91,6 +99,10 @@ void takeAttendance() {
                 cout << "Enter Student index to update attendance: (-1 to quit) ";
                 cin >> selectionNum;
                 
+                if (selectionNum == course3.getNumStudents()) {
+                    selectionNum -= 1;
+                }
+
                 if (selectionNum != -1) {
                     course3.changeAttendance(course3.getStudentAt(selectionNum));
                 }
