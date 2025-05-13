@@ -8,20 +8,12 @@ using namespace std;
 void menu();
 void takeAttendance();
 void viewAttendance();
-<<<<<<< Updated upstream
 void printDivider();
-=======
 string parseDate(string dateString);
->>>>>>> Stashed changes
 
 void selectDate(string course);
 void selectRoster(string c);
 
-<<<<<<< Updated upstream
-int main() {
-    Attendance test("data/course1/allStudents.txt");
-    menu();
-=======
 int main()
 {
    // Attendance test("data/course1/allStudents.txt");
@@ -36,7 +28,6 @@ int main()
     string dateString = parseDate(str);
     cout << dateString << endl;
     //menu();
->>>>>>> Stashed changes
     return 0;
 }
 
