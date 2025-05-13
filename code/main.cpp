@@ -2,7 +2,9 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include <ctime>
 #include "Attendance.h"
+#pragma warning(disable : 4996).
 using namespace std;
 
 void menu();
@@ -21,6 +23,7 @@ int main() {
     menu();
     return 0;
 }
+
 
 void menu() {
     int selectionNum = 0;

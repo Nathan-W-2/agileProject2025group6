@@ -60,7 +60,8 @@ void Attendance::readFile(string filepath) {
 
 void Attendance::writeFile(string courseFolderName)
 {  
-    string filePath = "data/" + courseFolderName + "/attendanceSheets/foo.txt"; 
+    string date = getDate();
+    string filePath = "data/" + courseFolderName + "/attendanceSheets/" + date + ".txt";
     cout << filePath << endl; 
     ofstream outputFile(filePath);
     for (Student*& student: allStudents) {
@@ -105,4 +106,55 @@ void Attendance::changeAttendance(Student* student) {
 
 int Attendance::getNumStudents() {
     return allStudents.size();
+}
+
+string Attendance::getDate() {
+    time_t currentTime = time(0);
+    char* dt = ctime(&currentTime);
+    string str(dt);
+    
+    //Ex: Tue May 13 13:12:23 2025
+    string newString = "";
+
+    //start after the day string ends
+    int beginSpace = 3;
+    int monthLen = 1;
+    int spaceCounter = 0;
+
+    for (int i = beginSpace + 1; i < str.size(); i++) {
+        //go until we find the second space
+        if (str[i] == ' ') {
+            if (spaceCounter == 0) {
+                spaceCounter++;
+            }
+            else {
+                break;
+            }
+        }
+        else {
+            //increment the length until we reach the second space
+            monthLen++;
+        }
+    }
+
+    newString = str.substr(beginSpace + 1, monthLen);
+
+    //set beginSpace the end of the new String
+    beginSpace = beginSpace + monthLen + 1;
+    spaceCounter = 1;
+    for (int i = beginSpace + 1; i < str.size(); i++) {
+        if (str[i] == ' ') {
+            //when we reach the final space set begin space to where the final space is
+            beginSpace += spaceCounter + 1;
+            break;
+        }
+        //increment until we reach the final space before the year string
+        spaceCounter++;
+    }
+
+    string year = str.substr(beginSpace, str.size() - 1);
+
+    newString = newString + " " + year;
+
+    return newString;
 }

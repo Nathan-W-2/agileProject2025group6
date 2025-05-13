@@ -22,6 +22,8 @@ class Attendance
     void readFile(string filepath);
     void writeFile(string courseFolderName);
     void changeAttendance(Student* student);
+    string getDate();
+ 
 private:
     vector<Student*> allStudents;
 };
