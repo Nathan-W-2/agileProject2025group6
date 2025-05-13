@@ -8,7 +8,6 @@
 | User Story ID  | User Story Name | Assigned To |
 |----------------|-----------------|-------------|
 | US-1           | Password Reset  |  Alice, Bob |
-| US-2           | Login           |  Alice, Bob |
 
 ### Format:
 | Task ID | Task Description | User Story ID | Assigned To | Status | Dependencies |
