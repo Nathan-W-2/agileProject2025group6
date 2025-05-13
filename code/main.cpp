@@ -1,21 +1,87 @@
 #include <iostream>
 #include <string>
+#include <ctime>
 #include "Attendance.h"
+#pragma warning(disable : 4996).
 using namespace std;
 
 void menu();
 void takeAttendance();
 void viewAttendance();
+<<<<<<< Updated upstream
 void printDivider();
+=======
+string parseDate(string dateString);
+>>>>>>> Stashed changes
 
 void selectDate(string course);
 void selectRoster(string c);
 
+<<<<<<< Updated upstream
 int main() {
     Attendance test("data/course1/allStudents.txt");
     menu();
+=======
+int main()
+{
+   // Attendance test("data/course1/allStudents.txt");
+    //test.printStudents();
+    //test.writeFile();
+
+    time_t currentTime = time(0);
+    char* dt = ctime(&currentTime);
+    string str(dt);
+
+    cout << "The current date and time is: " << str << endl;
+    string dateString = parseDate(str);
+    cout << dateString << endl;
+    //menu();
+>>>>>>> Stashed changes
     return 0;
 }
+
+string parseDate(string dateString) {
+    //Tue May 13 13:12:23 2025
+    string newString = "";
+
+    int beginSpace = 3;
+    int monthLen = 1;
+    int spaceCounter = 0;
+
+    for(int i = beginSpace + 1; i < dateString.size(); i++) {
+        //go until we find the second space
+        if (dateString[i] == ' ') {
+            if (spaceCounter == 0) {
+                spaceCounter++;
+            }
+            else {
+                break;
+            }
+        }
+        else {
+            monthLen++;
+        }
+    }
+
+    newString = dateString.substr(beginSpace + 1, monthLen);
+    
+    beginSpace = beginSpace + monthLen + 1;
+    spaceCounter = 1;
+    for (int i = beginSpace + 1; i < dateString.size(); i++) {
+        if (dateString[i] == ' ') {
+            beginSpace += spaceCounter + 1;
+            break;
+        }
+        spaceCounter++;
+    }
+
+    string year = dateString.substr(beginSpace, dateString.size() - 1);
+    
+    newString = newString + " " + year;
+    
+    return newString;
+}
+
 
 void menu() {
     int selectionNum = 0;
