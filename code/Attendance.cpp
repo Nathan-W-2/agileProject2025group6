@@ -18,13 +18,7 @@ Attendance::~Attendance(){
 
 Student* Attendance::getStudentAt(int index) const
 {  
-    if (index < 0 or index >= allStudents.size()) {
-        cout << "Index out of bounds" << endl; 
-        return 0; 
-    } else {
-        cout << "Length of allStudents: " << allStudents.size() << endl;
     return allStudents.at(index);
-    }
 }
 
 void Attendance::readFile(string filepath) {
