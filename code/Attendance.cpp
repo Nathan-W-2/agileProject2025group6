@@ -58,9 +58,11 @@ void Attendance::readFile(string filepath) {
     // }
 }
 
-void Attendance::writeFile()
-{
-    ofstream outputFile("foo.txt");
+void Attendance::writeFile(string courseFolderName)
+{  
+    string filePath = "data/" + courseFolderName + "/attendanceSheets/foo.txt"; 
+    cout << filePath << endl; 
+    ofstream outputFile(filePath);
     for (Student*& student: allStudents) {
         outputFile << student->name << " " << student->attendance << endl; 
     }

@@ -20,7 +20,7 @@ class Attendance
     
     void printStudents(); 
     void readFile(string filepath);
-    void writeFile();
+    void writeFile(string courseFolderName);
     void changeAttendance(Student* student);
 private:
     vector<Student*> allStudents;

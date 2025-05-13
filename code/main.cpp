@@ -67,14 +67,12 @@ void takeAttendance() {
                 cin >> selectionNum;
                 cout << "Selection num is: " << selectionNum << endl;
 
-                if (selectionNum == course1.getNumStudents()) {
-                    selectionNum -= 1;
-                }
 
                 if (selectionNum != -1) {
-                    course1.changeAttendance(course1.getStudentAt(selectionNum));
+                    course1.changeAttendance(course1.getStudentAt(selectionNum - 1));
                 }
             }
+            course1.writeFile("course1");
         }
         else if(selectionNum == 2) {
             Attendance course2("data/course2/allStudents.txt");
@@ -85,14 +83,11 @@ void takeAttendance() {
                 cin >> selectionNum;
                 cout << "Selection num is: " << selectionNum << endl;
 
-                if (selectionNum == course2.getNumStudents()) {
-                    selectionNum -= 1;
-                }
-
                 if (selectionNum != -1) {
-                    course2.changeAttendance(course2.getStudentAt(selectionNum));
+                    course2.changeAttendance(course2.getStudentAt(selectionNum - 1));
                 }
             }
+            course2.writeFile("course2");
         }
         else if(selectionNum == 3) {
             Attendance course3("data/course3/allStudents.txt");
@@ -107,10 +102,10 @@ void takeAttendance() {
                 }
 
                 if (selectionNum != -1) {
-                    course3.changeAttendance(course3.getStudentAt(selectionNum));
+                    course3.changeAttendance(course3.getStudentAt(selectionNum - 1));
                 }
-                
             }
+            course3.writeFile("course3");
         }
         
         cout << endl;
