@@ -24,6 +24,7 @@ class Attendance
     void writeFile(string courseFolderName);
     void changeAttendance(Student* student);
     string getDate();
+    string getMonthNum(string monthString);
     void getSummary(vector < string >& vec);
     void storeName(vector < Student* >& ros, vector < Student* >& students, string names);
  

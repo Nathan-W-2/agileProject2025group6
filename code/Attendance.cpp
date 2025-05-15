@@ -163,24 +163,18 @@ string Attendance::getDate() {
     time_t currentTime = time(0);
     char* dt = ctime(&currentTime);
     string str(dt);
-    
+
     //Ex: Tue May 13 13:12:23 2025
     string newString = "";
 
     //start after the day string ends
     int beginSpace = 3;
-    int monthLen = 1;
-    int spaceCounter = 0;
+    int monthLen = 0;
 
     for (int i = beginSpace + 1; i < str.size(); i++) {
         //go until we find the second space
         if (str[i] == ' ') {
-            if (spaceCounter == 0) {
-                spaceCounter++;
-            }
-            else {
-                break;
-            }
+            break;
         }
         else {
             //increment the length until we reach the second space
@@ -188,11 +182,26 @@ string Attendance::getDate() {
         }
     }
 
-    newString = str.substr(beginSpace + 1, monthLen);
+    string month = str.substr(beginSpace + 1, monthLen);
+    string monthNum = getMonthNum(month);
+    beginSpace += monthLen + 1;
+    int dayLen = 0;
+
+    for (int i = beginSpace + 1; i < str.size(); i++) {
+        if (str[i] == ' ') {
+            break;
+        }
+        else {
+            dayLen++;
+        }
+    }
+
+    string day = str.substr(beginSpace + 1, dayLen);
 
     //set beginSpace the end of the new String
-    beginSpace = beginSpace + monthLen + 1;
-    spaceCounter = 1;
+    beginSpace += dayLen + 1;
+    int spaceCounter = 0;
+
     for (int i = beginSpace + 1; i < str.size(); i++) {
         if (str[i] == ' ') {
             //when we reach the final space set begin space to where the final space is
@@ -203,11 +212,52 @@ string Attendance::getDate() {
         spaceCounter++;
     }
 
-    string year = str.substr(beginSpace, str.size() - 1);
+    string year = str.substr(beginSpace + 1, str.size() - 1);
 
-    newString = newString + " " + year;
-
+    newString = monthNum + "-" + day + "-" + year;
     return newString;
+}
+//--
+string Attendance::getMonthNum(string monthString) {
+    if (monthString == "Jan") {
+        return "01";
+    }
+    else if (monthString == "Feb") {
+        return "02";
+    }
+    else if (monthString == "Mar") {
+        return "03";
+    }
+    else if (monthString == "Apr") {
+        return "04";
+    }
+    else if (monthString == "May") {
+        return "05";
+    }
+    else if (monthString == "Jun") {
+        return "06";
+    }
+    else if (monthString == "Jul") {
+        return "07";
+    }
+    else if (monthString == "Aug") {
+        return "08";
+    }
+    else if (monthString == "Sep") {
+        return "09";
+    }
+    else if (monthString == "Oct") {
+        return "10";
+    }
+    else if (monthString == "Nov") {
+        return "11";
+    }
+    else if (monthString == "Dec") {
+        return "12";
+    }
+    else {
+        return "Invlaid month";
+    }
 }
 //--
 void Attendance::getSummary(vector < string >& vec) {
