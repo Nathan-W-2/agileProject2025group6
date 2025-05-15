@@ -2,7 +2,6 @@
 #include <string>
 #include <ctime>
 #include "Attendance.h"
-#pragma warning(disable : 4996).
 using namespace std;
 
 void menu();

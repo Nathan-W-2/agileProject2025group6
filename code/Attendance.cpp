@@ -5,6 +5,7 @@
 #include <vector>
 #include <sstream>
 #include <ctime>
+#pragma warning(disable : 4996).
 
 Attendance::Attendance(string filepath){
     readFile(filepath);
