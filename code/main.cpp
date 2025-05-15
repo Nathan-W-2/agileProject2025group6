@@ -35,10 +35,10 @@ int main() {
 void menu() {
     int selectionNum = 0;
     
-    while (selectionNum != 3)
+    while (selectionNum != -1)
     {
         cout << "========================" << endl;
-        cout << "Press the key for corresponding action, or type out 3 to quit" << endl;
+        cout << "Press the key for corresponding action, or type out -1 to quit" << endl;
         cout << "1) Take Attendance" << endl;
         cout << "2) View Attendance" << endl;
         cout << "3) Add a New Class" << endl;
@@ -46,7 +46,9 @@ void menu() {
         cout << endl;
         cout << "Enter number here: ";
         cin >> selectionNum;
-        
+        if (selectionNum == -1) {
+            break; 
+        }
         if(selectionNum == 1) {
             cout << endl;
             cout << "========================" << endl;
@@ -63,9 +65,9 @@ void menu() {
 void takeAttendance() {
     int selectionNum = 0;
     
-    while (selectionNum != 5)
+    while (selectionNum != -1)
     {
-        cout << "Choose a class" << endl;
+        cout << "Choose a class, or type -1 to go back" << endl;
         cout << "1) CSC 4000" << endl;
         cout << "2) CSC 3521" << endl;
         cout << "3) CSC 3521" << endl;
@@ -126,7 +128,8 @@ void takeAttendance() {
         
         cout << endl;
         cout << "========================" << endl;
-    }
+    } 
+    menu();
 }
 
 // View Attendance functions
@@ -162,9 +165,9 @@ void selectRoster(string c) {
 void viewAttendance() {
     int selectionNum = 0;
 
-    while (selectionNum != 4) {
+    while (selectionNum != -1) {
         cout << "========================" << endl;
-        cout << "Press the key for corresponding course, or type 4 to quit" << endl;
+        cout << "Press the key for corresponding course, or type -1 to go back" << endl;
         cout << "1) Class 1" << endl;
         cout << "2) Class 2" << endl;
         cout << "3) Class 3" << endl;
@@ -173,9 +176,12 @@ void viewAttendance() {
         cout << "Enter option here: ";
         cin >> selectionNum;
         cout << endl;
-        
+        if (selectionNum == -1) {
+            break; 
+        }
         selectDate("course1");
     }
+    menu();
 }
 
 void addClass() {
@@ -192,9 +198,12 @@ void selectDate(string course) {
     //prompt user to chose which class they would like to view
     cout << "========================" << endl;
     cout << "Which date would you like to chose? (MM/DD/YYYY)" << endl;
-    cout << "Enter date here: ";
+    cout << "Enter date here (type -1 to cancel):";
     cin >> date;
     cout << endl;
+    if (date == "-1") {
+
+    }
     
     string filePath = "/data/" + course + "/attendanceSheets/" + date + ".txt";
     cout << filePath << endl;
