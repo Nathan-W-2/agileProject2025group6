@@ -223,3 +223,105 @@ void appendToFile(string filePath, string newLine){
         outputFile << line << endl; 
     }
 }
+
+// Toledo Code
+
+void classSummary() {
+    vector < string > courseList;
+    vector < string > rosterList;
+    vector < string > dateList;
+    
+    fillVector("./data/courseList", courseList);
+    
+    string select;
+    
+    while (select != "quit") {
+        cout << "Course Section" << endl;
+        cout << "--------------" << endl;
+        
+// Make function?
+        for (int i = 0; i < courseList.size(); i++)
+        {
+            cout << i << ") " << courseList[i] << endl;
+        }
+        
+        int select_num = stoi(select);
+        
+        while (select_num >= 0 && select_num < courseList.size())
+        {
+            cout << "Select Course Section: ";
+            cin >> select;
+            
+            if (select == "quit") {
+                select_num = -1;
+            } else {
+                select_num = stoi(select);
+                string courseName = courseList[select_num];
+                
+                //-----
+                
+                string rosterFilePath = "./data/" + courseName + "/roster";
+                fillVector(rosterFilePath, rosterList);
+                
+                cout << "Roster Selection" << endl;
+                cout << "----------------" << endl;
+                
+                for (int j = 0; j < rosterList.size(); j++)
+                {
+                    cout << j << ") " << rosterList[j] << endl;
+                }
+                
+                string rosterSelect;
+                cout << "Select Roster: ";
+                cin >> rosterSelect;
+                
+                string roster = rosterList[stoi(rosterSelect)];
+                
+                //-----
+                
+                string dateFilePath = "./data/" + courseName + "/attendanceSheets";
+                fillVector(dateFilePath, dateList);
+                
+                cout << "Roster Selection" << endl;
+                cout << "----------------" << endl;
+                
+                for (int j = 0; j < dateList.size(); j++)
+                {
+                    cout << j << ") " << dateList[j] << endl;
+                }
+                
+                string dateSelect;
+                cout << "Select Date: ";
+                cin >> dateSelect;
+                
+                string date = dateList[stoi(dateSelect)];
+                
+                string filePath = "./data/" + courseName + "/attendanceSheets/" + date;
+                Attendance course(filePath);
+                //course.getSummary(roster);
+            }
+        }
+        
+        if (select_num == -1) {
+            break;
+        }
+    }
+    
+}
+
+void fillVector(string filePath, vector < string >& vec) {
+    ifstream file(filePath);
+    
+    if (file.is_open()) {
+        string line;
+        
+        while(getline(file, line)) {
+            vec.push_back(line);
+        }
+        
+        file.close();
+    } else {
+        std::cerr << "Unable to open file" << std::endl;
+    }
+}
+
