@@ -23,6 +23,9 @@ class Attendance
     void writeFile(string courseFolderName);
     void changeAttendance(Student* student);
     string getDate();
+    //
+    void getSummary(vector < string >& vec);
+    void storeName(vector < Student* >& ros, vector < Student* >& students, string names);
  
 private:
     vector<Student*> allStudents;

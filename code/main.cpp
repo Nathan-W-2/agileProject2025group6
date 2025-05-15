@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string>
+#include <fstream>
+#include <vector>
 #include <ctime>
 #include "Attendance.h"
 using namespace std;
@@ -8,16 +10,15 @@ void menu();
 void takeAttendance();
 void viewAttendance();
 void printDivider();
+void addClass();
+void appendToFile(string filePath, string newLine);
 
 void selectDate(string course);
 void selectRoster(string c);
 
-int main()
-{
-   // Attendance test("data/course1/allStudents.txt");
-    //test.printStudents();
-    //test.writeFile();
-  
+int main() {
+    Attendance test("data/course1/allStudents.txt");
+    appendToFile("data/courseNames.txt", "Test");
     menu();
     return 0;
 }
@@ -32,6 +33,7 @@ void menu() {
         cout << "Press the key for corresponding action, or type out 3 to quit" << endl;
         cout << "1) Take Attendance" << endl;
         cout << "2) View Attendance" << endl;
+        cout << "3) Add a New Class" << endl;
         
         cout << endl;
         cout << "Enter number here: ";
@@ -168,6 +170,14 @@ void viewAttendance() {
     }
 }
 
+void addClass() {
+    string date = "";
+    cout << "Enter in course name: ";
+    cin >> date;
+    cout << endl;
+    
+}
+
 void selectDate(string course) {
     string date = "";
 
@@ -190,4 +200,135 @@ void selectDate(string course) {
 void printDivider() {
     cout << endl;
     cout << "========================" << endl;
+}
+
+void appendToFile(string filePath, string newLine){
+    vector<string> allLines; 
+    ifstream file(filePath);
+    if (file.is_open()) {
+        string line;
+        //get each line one at a time
+        while (std::getline(file, line)) {
+            allLines.push_back(line);
+        }
+        file.close();
+    } else {
+        cerr << "Unable to open file" << endl;
+    }
+    //add new line that will be added to the file
+    allLines.push_back(newLine); 
+    ofstream outputFile(filePath);
+    for (auto& line: allLines) {
+        outputFile << line << endl; 
+    }
+}
+
+// Toledo Code
+
+void classSummary() {
+    vector < string > courseList;
+    vector < string > rosterList;
+    vector < string > dateList;
+    
+    fillVector("/Users/alejandrotoledo/Downloads/agileProject2025group6/code/data/courseNames.txt", courseList);
+    
+    string select;
+    
+    while (select != "quit") {
+        cout << "Course Section" << endl;
+        cout << "--------------" << endl;
+        
+// Make function?
+        for (int i = 0; i < courseList.size(); i++)
+        {
+            cout << i << ") " << courseList[i] << endl;
+        }
+        
+        int select_num = 0;
+        
+        while (select_num >= 0 && select_num < courseList.size())
+        {
+            cout << "Select Course Section: ";
+            cin >> select;
+            
+            if (select == "quit") {
+                select_num = -1;
+            } else {
+                select_num = stoi(select);
+                string courseName = courseList[select_num];
+                cout << endl;
+                //-----
+                
+                string roster = selectFile("/Users/alejandrotoledo/Downloads/agileProject2025group6/code/data/student_rosters", rosterList, "Roster");
+                string date = selectFile("/Users/alejandrotoledo/Downloads/agileProject2025group6/code/data/" + courseName + "/attendanceSheets", dateList, "Date");
+                
+                vector < string > rosters;
+                // Fills rosters with string of students
+                fillVector("/Users/alejandrotoledo/Downloads/agileProject2025group6/code/data/student_rosters/"+roster, rosters);
+                
+                string filePath = "/Users/alejandrotoledo/Downloads/agileProject2025group6/code/data/" + courseName + "/attendanceSheets/" + date;
+                Attendance course(filePath);
+                
+                cout << "Class Attendance: " << date << endl;
+                cout << "----------------" << endl;
+                course.getSummary(rosters);
+                cout << endl;
+                cout << "========================" << endl;
+            }
+        }
+        
+        if (select_num == -1) {
+            break;
+        }
+    }
+    
+}
+
+void fillVector(string filePath, vector < string >& vec) {
+    ifstream file(filePath);
+    
+    if (file.is_open()) {
+        string line;
+        
+        while(getline(file, line)) {
+            vec.push_back(line);
+        }
+        
+        file.close();
+    } else {
+        std::cerr << "Unable to open file" << std::endl;
+    }
+}
+
+void listFilesInDirectory(const string& dirPath, vector < string >& vec) {
+    if (filesystem::exists(dirPath) && filesystem::is_directory(dirPath)) {
+        // std::cout << "Files in " << dirPath << ":\n";
+        for (const auto& entry : filesystem::directory_iterator(dirPath)) {
+            if (filesystem::is_regular_file(entry.status())) {
+                vec.push_back(entry.path().filename());
+            }
+        }
+    } else {
+        std::cerr << "Path is not a directory or doesn't exist: " << dirPath << '\n';
+    }
+}
+
+string selectFile(string filePath, vector < string >& vec, string typeSelect) {
+//    string dateFilePath = "/Users/alejandrotoledo/Downloads/agileProject2025group6/code/data/" + courseName + "/attendanceSheets";
+    listFilesInDirectory(filePath, vec);
+    
+    cout << typeSelect << " Selection" << endl;
+    cout << "----------------" << endl;
+    
+    for (int j = 0; j < vec.size(); j++)
+    {
+        cout << j << ") " << vec[j] << endl;
+    }
+    
+    string option;
+    cout << "Select " << typeSelect << ": ";
+    cin >> option;
+    cout << endl;
+    
+    return vec[stoi(option)];
 }
