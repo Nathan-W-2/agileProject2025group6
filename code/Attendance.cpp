@@ -158,3 +158,46 @@ string Attendance::getDate() {
 
     return newString;
 }
+//--
+void Attendance::getSummary(vector < string >& vec) {
+    vector < Student* > copy;
+    copy = allStudents;
+    
+    vector < Student* > studentRoster;
+    
+    for (int i = 0; i < vec.size(); i++) {
+//        cout << vec[i] << endl;
+        storeName(studentRoster, copy, vec[i]);
+    }
+    
+    allStudents = studentRoster;
+    
+    printStudents();
+    allStudents = copy;
+    
+//    deleteVec(copy);
+//    deleteVec(studentRoster);
+}
+
+void Attendance::storeName(vector < Student* >& ros, vector < Student* >& students, string names){
+    
+    string stuName;
+    string stuName2;
+    int stuAttend;
+    
+    for (int i = 0; i < students.size(); i++) {
+//        cout << students.at(i)->name << endl;
+        
+        std::istringstream ss(students.at(i)->name);
+        
+        ss >> stuName >> stuName2 >> stuAttend;
+        
+        students.at(i)->name = stuName + " " + stuName2;
+        students.at(i)->attendance = stuAttend;
+        
+        if (students.at(i)->name == names) {
+            ros.push_back(students.at(i));
+            break;
+        }
+    }
+}

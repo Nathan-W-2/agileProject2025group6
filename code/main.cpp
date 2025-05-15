@@ -231,7 +231,7 @@ void classSummary() {
     vector < string > rosterList;
     vector < string > dateList;
     
-    fillVector("./data/courseList", courseList);
+    fillVector("/Users/alejandrotoledo/Downloads/agileProject2025group6/code/data/courseNames.txt", courseList);
     
     string select;
     
@@ -245,7 +245,7 @@ void classSummary() {
             cout << i << ") " << courseList[i] << endl;
         }
         
-        int select_num = stoi(select);
+        int select_num = 0;
         
         while (select_num >= 0 && select_num < courseList.size())
         {
@@ -257,11 +257,12 @@ void classSummary() {
             } else {
                 select_num = stoi(select);
                 string courseName = courseList[select_num];
-                
+                cout << endl;
                 //-----
                 
-                string rosterFilePath = "./data/" + courseName + "/roster";
-                fillVector(rosterFilePath, rosterList);
+                string rosterFilePath = "/Users/alejandrotoledo/Downloads/agileProject2025group6/code/data/student_rosters";
+                
+                listFilesInDirectory(rosterFilePath, rosterList);
                 
                 cout << "Roster Selection" << endl;
                 cout << "----------------" << endl;
@@ -274,15 +275,19 @@ void classSummary() {
                 string rosterSelect;
                 cout << "Select Roster: ";
                 cin >> rosterSelect;
+                cout << endl;
                 
                 string roster = rosterList[stoi(rosterSelect)];
                 
+                vector < string > rosters;
+                fillVector("/Users/alejandrotoledo/Downloads/agileProject2025group6/code/data/student_rosters/"+roster, rosters);
+                
                 //-----
                 
-                string dateFilePath = "./data/" + courseName + "/attendanceSheets";
-                fillVector(dateFilePath, dateList);
+                string dateFilePath = "/Users/alejandrotoledo/Downloads/agileProject2025group6/code/data/" + courseName + "/attendanceSheets";
+                listFilesInDirectory(dateFilePath, dateList);
                 
-                cout << "Roster Selection" << endl;
+                cout << "Date Selection" << endl;
                 cout << "----------------" << endl;
                 
                 for (int j = 0; j < dateList.size(); j++)
@@ -293,12 +298,17 @@ void classSummary() {
                 string dateSelect;
                 cout << "Select Date: ";
                 cin >> dateSelect;
+                cout << endl;
                 
                 string date = dateList[stoi(dateSelect)];
                 
-                string filePath = "./data/" + courseName + "/attendanceSheets/" + date;
+                string filePath = "/Users/alejandrotoledo/Downloads/agileProject2025group6/code/data/" + courseName + "/attendanceSheets/" + date;
                 Attendance course(filePath);
-                //course.getSummary(roster);
+                cout << "Class Attendance: " << date << endl;
+                cout << "----------------" << endl;
+                course.getSummary(rosters);
+                cout << endl;
+                cout << "========================" << endl;
             }
         }
         
@@ -325,3 +335,15 @@ void fillVector(string filePath, vector < string >& vec) {
     }
 }
 
+void listFilesInDirectory(const string& dirPath, vector < string >& vec) {
+    if (filesystem::exists(dirPath) && filesystem::is_directory(dirPath)) {
+        // std::cout << "Files in " << dirPath << ":\n";
+        for (const auto& entry : filesystem::directory_iterator(dirPath)) {
+            if (filesystem::is_regular_file(entry.status())) {
+                vec.push_back(entry.path().filename());
+            }
+        }
+    } else {
+        std::cerr << "Path is not a directory or doesn't exist: " << dirPath << '\n';
+    }
+}
