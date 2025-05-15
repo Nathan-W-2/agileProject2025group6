@@ -12,7 +12,7 @@ struct Student{
 class Attendance
 {
     public:
-    Attendance(string filepath);
+    Attendance(string filepath, bool isAttendanceSheet);
     ~Attendance();
 
     Student* getStudentAt(int index) const; 
@@ -20,6 +20,7 @@ class Attendance
     
     void printStudents(); 
     void readFile(string filepath);
+    void readAttendanceSheet(string filepath);
     void writeFile(string courseFolderName);
     void changeAttendance(Student* student);
     string getDate();

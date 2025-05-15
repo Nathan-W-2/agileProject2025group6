@@ -1,22 +1,22 @@
-Christopher Abney 0
-Ronald Brock 0
-Brandon Carls 0
-Mitchell Clark 0
-Ian Flaskamp 0
-Joseph Fudali 0
-Adrian Grady 0
-Megan Jensen 0
-Sarah Kersten 0
-Robert Kloss 0
-Matt Michel 0
-A'Shun Motley 0
-Dustin Parks 0
-Arthur Pisanko 0
-Daniel Plutchak 0
-Isaac Silverson 0
-Kyle Stuersel 0
-Ezra Tetrick 0
-Alejandro Toledo 0
-Nathan Williams 0
-Ethan Wojciechowski 2
-Tyler Wojdyla 0
+Christopher_Abney 0
+Ronald_Brock 0
+Brandon_Carls 0
+Mitchell_Clark 0
+Ian_Flaskamp 0
+Joseph_Fudali 0
+Adrian_Grady 0
+Megan_Jensen 0
+Sarah_Kersten 0
+Robert_Kloss 0
+Matt_Michel 0
+A'Shun_Motley 0
+Dustin_Parks 0
+Arthur_Pisanko 3
+Daniel_Plutchak 0
+Isaac_Silverson 0
+Kyle_Stuersel 0
+Ezra_Tetrick 0
+Alejandro_Toledo 0
+Nathan_Williams 0
+Ethan_Wojciechowski 0
+Tyler_Wojdyla 0

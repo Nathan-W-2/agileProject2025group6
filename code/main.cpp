@@ -13,6 +13,8 @@ void viewAttendance();
 void printDivider();
 void addClass();
 void appendToFile(string filePath, string newLine);
+string selectFile(string filePath, vector < string >& vec, string typeSelect);
+void fillVector(string filePath, vector < string >& vec);
 
 void selectDate(string course);
 void selectRoster(string c);
@@ -23,7 +25,7 @@ void fillVector(string filePath, vector < string >& vec);
 string selectFile(string filePath, vector < string >& vec, string typeSelect);
 
 int main() {
-    Attendance test("data/course1/allStudents.txt");
+    Attendance test("data/course1/allStudents.txt", false);
     appendToFile("data/courseNames.txt", "Test");
     menu();
     return 0;
@@ -73,7 +75,7 @@ void takeAttendance() {
        
         
         if(selectionNum == 1) {
-            Attendance course1("data/course1/allStudents.txt");
+            Attendance course1("data/course1/allStudents.txt", false);
 
             course1.printStudents();
             while (selectionNum != -1) {
@@ -89,7 +91,7 @@ void takeAttendance() {
             course1.writeFile("course1");
         }
         else if(selectionNum == 2) {
-            Attendance course2("data/course2/allStudents.txt");
+            Attendance course2("data/course2/allStudents.txt", false);
 
             course2.printStudents();
             while (selectionNum != -1) {
@@ -104,7 +106,7 @@ void takeAttendance() {
             course2.writeFile("course2");
         }
         else if(selectionNum == 3) {
-            Attendance course3("data/course3/allStudents.txt");
+            Attendance course3("data/course3/allStudents.txt", false);
 
             course3.printStudents();
             while (selectionNum != -1) {
@@ -196,8 +198,8 @@ void selectDate(string course) {
     
     string filePath = "/data/" + course + "/attendanceSheets/" + date + ".txt";
     cout << filePath << endl;
-    Attendance course2(filePath);
-    course2.printStudents();
+    Attendance viewCourse(filePath, true);
+    viewCourse.printStudents();
 
     //prompt user to chose how they would like the attendance to be displayed
     cout << "========================" << endl;
@@ -273,7 +275,7 @@ void classSummary() {
                 fillVector("/Users/alejandrotoledo/Downloads/agileProject2025group6/code/data/student_rosters/"+roster, rosters);
                 
                 string filePath = "/Users/alejandrotoledo/Downloads/agileProject2025group6/code/data/" + courseName + "/attendanceSheets/" + date;
-                Attendance course(filePath);
+                Attendance course(filePath, true);
                 
                 cout << "Class Attendance: " << date << endl;
                 cout << "----------------" << endl;

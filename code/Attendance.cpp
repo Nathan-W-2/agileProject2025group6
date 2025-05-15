@@ -5,10 +5,15 @@
 #include <vector>
 #include <sstream>
 #include <ctime>
+#include <algorithm>
 #pragma warning(disable : 4996).
 
-Attendance::Attendance(string filepath){
-    readFile(filepath);
+Attendance::Attendance(string filepath, bool isAttendanceSheet){
+    if (isAttendanceSheet) {
+        readAttendanceSheet(filepath); 
+    } else {
+        readFile(filepath);
+    }
 }
 
 Attendance::~Attendance(){
@@ -44,7 +49,7 @@ void Attendance::readFile(string filepath) {
         }
         file.close();
     } else {
-        std::cerr << "Unable to open file" << std::endl;
+        std::cerr << "Unable to open roster file" << std::endl;
     }
 
     // for (const vector<string>& element: parsedInput) {
@@ -59,6 +64,47 @@ void Attendance::readFile(string filepath) {
     // }
 }
 
+void Attendance::readAttendanceSheet(string filepath) {
+    vector<vector<string>> parsedInput;
+
+    
+	std::ifstream file("./data/course1/attendanceSheets/foo.txt");
+    if (file.is_open()) {
+        std::string line;
+        //get each line one at a time
+        while (std::getline(file, line)) {
+            std::stringstream ss(line);
+            std::string word;
+			vector<string> v;
+            //each word is added to a vector
+            while (ss >> word) {
+                v.push_back(word);
+            }
+			parsedInput.push_back(v);
+        }
+        file.close();
+    } else {
+        std::cerr << "Unable to open attendance file" << std::endl;
+    }
+
+    for (const vector<string>& element: parsedInput) {
+        Student* studentPtr = new Student;
+        string formattedName = element.at(0);
+        //replacing underscores with spaces
+        replace(formattedName.begin(), formattedName.end(), '_', ' ');
+        studentPtr->name = formattedName;
+        cout << formattedName << endl; 
+        studentPtr->attendance = stoi(element.at(1));
+        allStudents.push_back(studentPtr);
+    }
+
+    for (Student*& student: allStudents) {
+        cout << student->name << endl;
+        cout << student->attendance << endl; 
+    }
+    cout << allStudents.size();
+}
+
 void Attendance::writeFile(string courseFolderName)
 {  
     string date = getDate();
@@ -66,7 +112,11 @@ void Attendance::writeFile(string courseFolderName)
     cout << filePath << endl; 
     ofstream outputFile(filePath);
     for (Student*& student: allStudents) {
-        outputFile << student->name << " " << student->attendance << endl; 
+        //replacing spaces with underscores
+        string formattedName = student->name; 
+        //replacing underscores with spaces
+        replace(formattedName.begin(), formattedName.end(), ' ', '_');
+        outputFile << formattedName << " " << student->attendance << endl; 
     }
 }
 
