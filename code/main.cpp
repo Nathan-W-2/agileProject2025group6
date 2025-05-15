@@ -13,6 +13,8 @@ void viewAttendance();
 void printDivider();
 void addClass();
 void appendToFile(string filePath, string newLine);
+string selectFile(string filePath, vector < string >& vec, string typeSelect);
+void fillVector(string filePath, vector < string >& vec);
 
 void selectDate(string course);
 void selectRoster(string c);
@@ -23,7 +25,7 @@ void fillVector(string filePath, vector < string >& vec);
 string selectFile(string filePath, vector < string >& vec, string typeSelect);
 
 int main() {
-    Attendance test("data/course1/allStudents.txt");
+    Attendance test("data/course1/allStudents.txt", false);
     appendToFile("data/courseNames.txt", "Test");
     menu();
     return 0;
@@ -32,10 +34,10 @@ int main() {
 void menu() {
     int selectionNum = 0;
     
-    while (selectionNum != 3)
+    while (selectionNum != -1)
     {
         cout << "========================" << endl;
-        cout << "Press the key for corresponding action, or type out 3 to quit" << endl;
+        cout << "Press the key for corresponding action, or type out -1 to quit" << endl;
         cout << "1) Take Attendance" << endl;
         cout << "2) View Attendance" << endl;
         cout << "3) Add a New Class" << endl;
@@ -43,7 +45,9 @@ void menu() {
         cout << endl;
         cout << "Enter number here: ";
         cin >> selectionNum;
-        
+        if (selectionNum == -1) {
+            break; 
+        }
         if(selectionNum == 1) {
             cout << endl;
             cout << "========================" << endl;
@@ -60,9 +64,9 @@ void menu() {
 void takeAttendance() {
     int selectionNum = 0;
     
-    while (selectionNum != 5)
+    while (selectionNum != -1)
     {
-        cout << "Choose a class" << endl;
+        cout << "Choose a class, or type -1 to go back" << endl;
         cout << "1) CSC 4000" << endl;
         cout << "2) CSC 3521" << endl;
         cout << "3) CSC 3521" << endl;
@@ -72,7 +76,7 @@ void takeAttendance() {
        
         
         if(selectionNum == 1) {
-            Attendance course1("data/course1/allStudents.txt");
+            Attendance course1("data/course1/allStudents.txt", false);
 
             course1.printStudents();
             while (selectionNum != -1) {
@@ -88,7 +92,7 @@ void takeAttendance() {
             course1.writeFile("course1");
         }
         else if(selectionNum == 2) {
-            Attendance course2("data/course2/allStudents.txt");
+            Attendance course2("data/course2/allStudents.txt", false);
 
             course2.printStudents();
             while (selectionNum != -1) {
@@ -103,7 +107,7 @@ void takeAttendance() {
             course2.writeFile("course2");
         }
         else if(selectionNum == 3) {
-            Attendance course3("data/course3/allStudents.txt");
+            Attendance course3("data/course3/allStudents.txt", false);
 
             course3.printStudents();
             while (selectionNum != -1) {
@@ -123,7 +127,8 @@ void takeAttendance() {
         
         cout << endl;
         cout << "========================" << endl;
-    }
+    } 
+    menu();
 }
 
 // View Attendance functions
@@ -159,9 +164,9 @@ void selectRoster(string c) {
 void viewAttendance() {
     int selectionNum = 0;
 
-    while (selectionNum != 4) {
+    while (selectionNum != -1) {
         cout << "========================" << endl;
-        cout << "Press the key for corresponding course, or type 4 to quit" << endl;
+        cout << "Press the key for corresponding course, or type -1 to go back" << endl;
         cout << "1) Class 1" << endl;
         cout << "2) Class 2" << endl;
         cout << "3) Class 3" << endl;
@@ -170,9 +175,12 @@ void viewAttendance() {
         cout << "Enter option here: ";
         cin >> selectionNum;
         cout << endl;
-        
+        if (selectionNum == -1) {
+            break; 
+        }
         selectDate("course1");
     }
+    menu();
 }
 
 void addClass() {
@@ -189,14 +197,17 @@ void selectDate(string course) {
     //prompt user to chose which class they would like to view
     cout << "========================" << endl;
     cout << "Which date would you like to chose? (MM/DD/YYYY)" << endl;
-    cout << "Enter date here: ";
+    cout << "Enter date here (type -1 to cancel):";
     cin >> date;
     cout << endl;
+    if (date == "-1") {
+
+    }
     
     string filePath = "/data/" + course + "/attendanceSheets/" + date + ".txt";
     cout << filePath << endl;
-    Attendance course2(filePath);
-    course2.printStudents();
+    Attendance viewCourse(filePath, true);
+    viewCourse.printStudents();
 
     //prompt user to chose how they would like the attendance to be displayed
     cout << "========================" << endl;
@@ -272,7 +283,7 @@ void classSummary() {
                 fillVector("/Users/alejandrotoledo/Downloads/agileProject2025group6/code/data/student_rosters/"+roster, rosters);
                 
                 string filePath = "/Users/alejandrotoledo/Downloads/agileProject2025group6/code/data/" + courseName + "/attendanceSheets/" + date;
-                Attendance course(filePath);
+                Attendance course(filePath, true);
                 
                 cout << "Class Attendance: " << date << endl;
                 cout << "----------------" << endl;
