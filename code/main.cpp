@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <filesystem>
 #include <vector>
 #include <ctime>
 #include "Attendance.h"
@@ -15,6 +16,11 @@ void appendToFile(string filePath, string newLine);
 
 void selectDate(string course);
 void selectRoster(string c);
+void listFilesInDirectory(const string& dirPath, vector < string >& vec);
+
+void classSummary();
+void fillVector(string filePath, vector < string >& vec);
+string selectFile(string filePath, vector < string >& vec, string typeSelect);
 
 int main() {
     Attendance test("data/course1/allStudents.txt");
@@ -305,7 +311,8 @@ void listFilesInDirectory(const string& dirPath, vector < string >& vec) {
         // std::cout << "Files in " << dirPath << ":\n";
         for (const auto& entry : filesystem::directory_iterator(dirPath)) {
             if (filesystem::is_regular_file(entry.status())) {
-                vec.push_back(entry.path().filename());
+                // vec.push_back(entry.path().filename());
+                vec.push_back(entry.path().filename().string());
             }
         }
     } else {
